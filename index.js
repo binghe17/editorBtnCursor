@@ -6,6 +6,8 @@ let ui = {
 	editor: document.querySelector('#editor'),
 	insImage: document.querySelector('#insImage'),
 	insImage2: document.querySelector('#insImage2'),
+	saveCursorPoint: document.querySelector('#saveCursorPoint'),
+	loadCursorPoint: document.querySelector('#loadCursorPoint'),
 
 	
 };
@@ -14,7 +16,8 @@ let range;
 ui.editor.focus();
 
 ui.editor.addEventListener('blur', function(e){
-	range = SM.range;
+	// range = SM.range;
+	range = window.getSelection().getRangeAt(0)
 	// console.log(range);
 });
 
@@ -31,8 +34,6 @@ ui.insImage.addEventListener('click', function(e){
 	img.setAttribute('src', 'https://cdn.icon-icons.com/icons2/2151/PNG/128/map_map_marker_icon_132682.png');
 
 	// SM.insertElement(img);
-	
-	// let range = window.getSelection().getRangeAt(0)
 	range.deleteContents();
 	range.insertNode(img);
 	range.collapse(false);
@@ -53,7 +54,6 @@ ui.insImage2.addEventListener('click', function(e){
 	//jquery사용
 	$(code).each(function(i,elem){
 		// SM.insertElement(elem);
-		// let range = window.getSelection().getRangeAt(0)
 		range.deleteContents();
 		range.insertNode(elem);
 		range.collapse(false);
@@ -62,5 +62,20 @@ ui.insImage2.addEventListener('click', function(e){
 	
 	ui.editor.focus();
 	
+});
+
+let cursorPoint;
+ui.saveCursorPoint.addEventListener('click', function(e){//保存焦点1 及 失去焦点
+	cursorPoint = window.getSelection().getRangeAt(0);
+	console.log('save',cursorPoint)
+});
+ui.loadCursorPoint.addEventListener('click', function(e){//还原焦点1
+	console.log('load',cursorPoint)
+	cursorPoint.setStart(cursorPoint.startContainer, cursorPoint.startOffset);
+	cursorPoint.setEnd(cursorPoint.endContainer, cursorPoint.endOffset);
+	sel = window.getSelection()
+	sel.removeAllRanges();
+	sel.addRange(cursorPoint);
+
 });
 
