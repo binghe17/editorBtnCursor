@@ -1,0 +1,21 @@
+#editor {
+	border: 1px solid #ccc;
+	word-wrap: break-word;
+}
+
+
+button {
+	width: 100px;
+	height: 100px;
+}
+
+
+/* [ http://help.dottoro.com/lcrnvhdh.php ] */
+.readonly {
+	-moz-user-modify: read-only;
+	-webkit-user-modify: read-only;
+}
+.readwrite {
+	-moz-user-modify: read-write;
+	-webkit-user-modify: read-write;
+}
