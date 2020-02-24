@@ -1,7 +1,22 @@
 #editor {
 	border: 1px solid #ccc;
 	word-wrap: break-word;
+	padding: 5px;
 }
+#editor p{
+	padding: 5px;
+	border: 1px solid rgb(179, 236, 179); 
+	margin:0;
+}
+#editor span, #editor b, #editor i {
+	border:1px solid #d3d3d3;
+}
+
+#editor div{
+	padding: 5px;
+	border:1px solid #8b9eff;
+}
+
 
 
 button {
