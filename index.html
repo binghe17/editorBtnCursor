@@ -9,27 +9,92 @@
 </head>
 
 <body>
-	<div id="domPathBox" style="float:right;"></div>
-	<button id="insImage">img</button>
-	<button id="insImage2">img2</button>
-	<button id="saveCursorPoint">saveCursor</button>
-	<button id="loadCursorPoint">loadCursor</button>
-
+	<div id="toolbarBox">
+		<div id="domPathBox"></div>
+		<button id="saveCursorPoint">saveCursor</button>
+		<button id="loadCursorPoint">loadCursor</button>
+		<button id="insImage">insert img</button>
+		<button id="insImage2">insert iframe youtube</button>
+	</div>
+	<br>
 	<div id="editor" contenteditable="true">
 		<p>
-			aaaaa
-			<b>bbbbb</b>
-			text text text<br><a href="javascript:;">asdfasdfasdf</a><br>text text text<br>
-			<i>iiiiii</i><span>aaa</span></p>
-		<p><span><br></span></p>
-		<p><span><br></span></p>
-		<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcRtoP59n1sWyo1LEYomsL29a6c3OFejzJXE68k8WKNtXMbiBoLw&s">
-		<p>bbb</p>
-		<p>ccc<br style="box-sizing: border-box;"></p>
-		<p>ddd</p>
-		<div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0FlVLrZgAjM0gsNnzHUvVkHDKJiTJFJhlgIqeCbpI-rcR--aD_A&s"></div>
-		<img src="https://media.tenor.com/images/8453246849eaa4ac4c920fe825442a03/tenor.gif">
+			aaaaa<b>bbbbb</b>text text text<br>
+			<a href="javascript:;">asdfasdfasdf</a><br>
+			text text text<br>
+			<i>iiiiii</i><span>aaa</span>
+		</p>
+		<p>
+			p<br>
+			<span> p > span</span><br><br>
+			<i> p > i</i><br>
+			<b> p > b</b><br>
+		</p>
 
+
+		<br><br>		
+		<p>
+			<pre>p > pre (p안에 pre속할)</pre>
+		</p>
+		<p>
+			<div> p > div</div>
+			주의: div,pre는 p안에 들어갈수 없음. (p시작~pre시작을만나면 p닫기로됨, 텍스트는 상위로 가고, p닫기는 자동 p닫기앞에 p시작을 만들어 준다.)
+		</p>
+		<br><br>
+
+
+		<div>
+			<div class="iframeWrapper" contenteditable="false">
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/WNmnpGC_hgE" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+		<div>
+			<div class="iframeWrapper" contenteditable="false">
+				<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDIJ9XX2ZvRKCJcFRrl-lRanEtFUow4piM&q=Space+Needle,Seattle+WA" allowfullscreen></iframe>
+			</div>
+		</div>
+
+		
+		<div>
+			div
+			<div contenteditable="false">
+				[contenteditable=false]
+				<div>div <div> > div</div></div>
+			</div>
+			<div contenteditable="false">
+				[contenteditable=false]<br>
+				<span>span <span> > span</span></span>
+			</div>
+			contenteditable=false 두개 연속 붙으면 커서 이동시 한번에 두개 뛰여 넘는다.(삭제도 두개 같이 된다.)
+			<br>
+			<div>
+				> div
+				<div contenteditable="false">
+					[contenteditable=false]
+					<div>div <div> > div</div></div>
+				</div>
+				<span contenteditable="false">
+					[contenteditable=false]<br>
+					<span>span <span> > span</span></span>
+				</span>
+				> div
+				<div>
+					> div
+				</div>
+			</div>
+			div
+		</div>
+
+
+		<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcRtoP59n1sWyo1LEYomsL29a6c3OFejzJXE68k8WKNtXMbiBoLw&s">
+		<p>ppppppppppppppppp</p>
+		<p>ppppppppppppppppp (p태그 또는 텍스트내에서 enter시 동급의 p태그가 생성됨)</p>
+		------주의: 태그없는 역역에서 Enter시 엔터 시점부터 아래로 전부 div로 묶는다------
+		<div>divdivdivdivdivdiv</div>
+		<div>divdivdivdivdivdiv (div태그내에서 enter시 동급의 div태그가 생성됨)</div>
+		<div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0FlVLrZgAjM0gsNnzHUvVkHDKJiTJFJhlgIqeCbpI-rcR--aD_A&s"></div>
+		<div><img src="https://media.tenor.com/images/8453246849eaa4ac4c920fe825442a03/tenor.gif"></div>
+		<div>shift + enter키 같이 누르면 div,p태그에서 다 br태그로 넣는다.</div>
 		
 	</div> 
 

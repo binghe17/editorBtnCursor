@@ -18,13 +18,13 @@ let SelectionManager = {
 		this.range.insertNode(document.createTextNode(v))
 		this.range.collapse()
 	},
-	insert(v, html = false) {
-		this.set(v, html)
+	insert(v, isHtml = false) {
+		this.set(v, isHtml)
 		this.range.collapse()
 	},
-	set(v, html = false) {
+	set(v, isHtml = false) {
 		this.range.deleteContents()
-		if (html) {
+		if (isHtml) {
 			let div = document.createElement('div')
 			div.innerHTML = v
 			div.childNodes.forEach(node => this.range.insertNode(node))
