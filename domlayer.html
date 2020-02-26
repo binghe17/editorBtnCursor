@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<style>
+		body * {
+			padding: 5px;
+			border:1px solid #333;
+			color: #ccc;
+
+			/* display: block; */
+			/* display:inline-block; */
+			/* display:inherit; */
+			/* display:inline; */
+
+			/* 
+			설명:
+				display:initial; inline-block; inline; unset;  에서 enter키를 누르면 <br>이 되고
+				display:inherit; block; 에서 enter키를 누르면 해당 tag를 2등분한다. 
+				display를 설정하지 않고 자체 스타일따르게 하면 em에서 enter시 div>mark>i>b root부터 층관계를 유지하면서 끊어진다.
+				display를 설정하지 않을떄 body는 block이고 하층구조들을 다 inline이다.
+			*/
+		}
+
+		/* #test1 mark { 
+			display: block; 
+		} */
+		/* 설명: display: block일때 mark>i>b  mark부터 층관계를 유지하면서 끊어진다. */
+
+
+		#test1 mark > i { 
+			display: block; 
+			/* display: inline-block;  */
+		}
+		/* 설명: 
+			display: block일때 i>b  mark부터 층관계를 유지하면서 끊어진다.
+			display: inline-block일떄 div>mark>i>b   상단에서 display:block만날때까지 올라가서 끊어준다. 없으면 root까지 올라가서 짜른다.
+		 */
+		/* 분석결과: 해당dom에서 display를 정의하지 않음 상단에서 display정의한데까지 올라가서 끊어준다. */
+		
+
+
+		body img, body iframe, body video, body canvas, body object {
+			width:100px;
+			height:100px;
+		}
+		body pre{
+			color: #000;
+		}
+		/* body > div> div {display: block;} */
+
+
+	</style>
+</head>
+<body>
+
+<pre contenteditable="true" style="display:inline-block">
+DOM layer간의 관계성 DEMO
+- 에디터 우선순서: p > a > code > i > s > strong > sub > sub > u > (text) 이런줄 알았지만 이것이 아님.
+- 태그간에는 우선순위가 없고 어떻게 태그가 시작됬으면 어떻게 태그을 닫아준다.
+- display:block, display:inline-block에 따라 엔터키가 짜르는 방법이 달라질수 있다.
+----
+* 把单标签写错为双标签时浏览器会自动删掉后面的闭合标签。如：input
+</pre><br>
+
+<p id="test1" contenteditable="true">
+	<mark>mmmmmmmmmmmmmm<i class="aaa">iiiiiiiiii<b>bbbbb(여기서 엔터키 눌러보세요)bbbbbbb</mark>bbbbb</b>iiiii</i><br><br>
+	<mark>mmmmmmmmmmmmmm<i class="aaa">iiiiiiiiii<b>bbbbb(여기서 엔터키 눌러보세요)bbbbbbb</mark>iiiii</i>bbbbb</b><br><br>
+	(mark>i>b 시작이 몇번쨰층인가에 따라 닫을때도 몇번쨰 층대 구조대로 닫아준다.)
+	<br><br><br><br>
+
+	<u>uuuuuuu<em>emuuuuuu</u>emeeeeeeeeeeeeee</em>
+	<em>eeeeeeeeeee<u>eeeeeeeeeeee</em>uuuuuuuuuuu</u>
+	<s>ssssss<em>sssss</s>emeeeeeeeeee</em>
+	<em>emsssss<s>sssss</em>emeeeeeeeeee</s><br><br>
+	(태그간에는 우선순위가 없음)
+</p>
+<br><br><br><br><br><br>
+
+<div>
+	内容分区:
+	<div>
+		<address>address</address>
+		<article>article</article>
+		<aside>aside</aside>
+		<footer>footer</footer>
+		<header>header</header>
+		<h1>h1</h1>
+		<h2>h2</h2>
+		<h3>h3</h3>
+		<h4>h4</h4>
+		<h5>h5</h5>
+		<h6>h6</h6>
+		<hgroup>hgroup</hgroup>
+		<main>main</main>
+		<nav>nav</nav>
+		<section>section</section>
+	</div>
+	
+	文本内容
+	<div>
+		<blockquote>blockquote</blockquote>
+		<dir>dir</dir>
+		<div>div</div>
+		<figcaption>figcaption</figcaption>
+		<figure>figure</figure>
+		<hr>
+		<main>main</main>
+		<p>p</p>
+		<pre>pre</pre>
+		<ul>ul</ul>
+		<ol>ol</ol>
+		<li>li</li>
+		<dl>dl</dl>
+		<dt>dt</dt>
+		<dd>dd</dd>
+	</div>
+
+	内联文本语义
+	<div>
+		<a>a</a>
+		<abbr>abbr</abbr>
+		<b>b</b>
+		<bdi>bdi</bdi>
+		<bdo>bdo</bdo>
+		<br>
+		<cite>cite</cite>
+		<data>data</data>
+		<dfn>dfn</dfn>
+		<em>em</em>
+		<i>i</i>
+		<kbd>kbd</kbd>
+		<mark>mark</mark><!-- 背景色为黄色 -->
+		<q>q</q><!-- 文字会自动双引号 -->
+		<rb>rb</rb>
+		<rp>rp</rp>
+		<rt>rt</rt>
+		<rtc>rtc</rtc>
+		<ruby>ruby</ruby>
+		<s>s</s><!-- 删除线 -->
+		<samp>samp</samp>
+		<small>small</small>
+		<span>span</span>
+		<strong>strong</strong><!-- 加粗 -->
+		<sub>sub</sub><!-- 下标 -->
+		<sup>sup</sup><!-- 上标 -->
+		<time>time</time>
+		<tt>tt</tt>
+		<u>u</u><!-- 下划线 -->
+		<var>var</var>
+		<wbr />
+	</div>
+
+	图片和多媒体
+	<div>
+		<area />
+		<audio>audio</audio>
+		<img />
+		<map>map</map>
+		<track />
+		<video>video</video>
+	</div>
+
+	内嵌内容
+	<div>
+		<applet>applet</applet>
+		<embed />
+		<iframe>iframe</iframe>
+		<noembed>noembed</noembed>
+		<object>object</object>
+		<param />
+		<picture>picture</picture>
+		<source />
+	</div>
+
+	脚本
+	<div>
+		<canvas>canvas</canvas>
+		<noscript>noscript</noscript>
+		<script>//script</script>
+	</div>
+
+	编辑标识
+	<div>
+		<del>del</del><!-- 删除线 -->
+		<ins>ins</ins><!-- 下划线 -->
+	</div>
+
+	表格内容
+	<div>
+		<table>
+			<caption>caption</caption>
+			<colgroup>
+				<col>
+				<col>
+			</colgroup>
+			<thead></thead>
+			<tbody>
+				<tr>
+					<th>th</th><!-- 加粗 -->
+					<td>td</td>
+				</tr>
+			</tbody>
+			<tfoot><tr><td></td></tr></tfoot>
+		</table><!-- table은 격식이 맞지 않음 자동으로 수정안해줌. th,td만 tr로 와퍼해줌 -->
+	</div>
+
+	表单
+	<div>
+		<button>button</button>
+		<datalist>datalist</datalist>
+		<fieldset>fieldset</fieldset>
+		<form>form</form>
+		<input />
+		<label>label</label>
+		<legend>legend</legend>
+		<meter>meter</meter>
+		<optgroup></optgroup>
+		<option>option</option>
+		<output>output</output>
+		<progress>progress</progress>
+		<select>select</select>
+		<textarea>textarea</textarea>
+	</div>
+
+	交互元素
+	<div>
+		<details>details</details><!-- Q&A常见问题隐藏显示样式-->
+		<dialog>dialog</dialog>
+		<menu>menu</menu>
+		<menuitem>menuitem</menuitem>
+		<summary>summary</summary>
+	</div>
+	
+	Web 组件
+	<div>
+		<content>content</content>
+		<element>element</element>
+		<shadow>shadow</shadow>
+		<slot>slot</slot>
+		<template>template</template>
+	</div>
+
+
+</div><br>
+<!-- <div>
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/WNmnpGC_hgE" frameborder="0" allowfullscreen></iframe>
+	<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDIJ9XX2ZvRKCJcFRrl-lRanEtFUow4piM&q=Space+Needle,Seattle+WA" allowfullscreen></iframe>
+	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcRtoP59n1sWyo1LEYomsL29a6c3OFejzJXE68k8WKNtXMbiBoLw&s" />
+</div> -->
+
+</body>
+</html>
